@@ -1,4 +1,6 @@
-const resList=[{data: {
+const resList=[
+    {
+data: {
 id: "151649",
 name: "KFC",
 cloudinaryImageId: "RX_THUMBNAIL/IMAGES/VENDOR/2024/12/9/a0791358-5048-4a95-bd74-613b767c03ad_17822.JPG",

@@ -1,24 +1,21 @@
  
 import useRestaurantMenu from "../utils/useRestaurantMenu";
 import {useParams} from "react-router"
-import resListMenu from "../utils/menu_mockdata";
  import Shimmer from "./Shimmer";
+ import RestaurantCategory from "./RestaurantCategories";
  
 const RestaurantMenu = () => {
     const {resId} = useParams();
     const resInfo = useRestaurantMenu(resId);
     // useEffect(()=>{fetchMenu()},[]);
+    const categories = resInfo?.cards[4]?.groupedCard.cardGroupMap. REGULAR?.cards.filter((category)=>category?.card?.card['@type'] ==="type.googleapis.com/swiggy.presentation.food.v2.ItemCategory");
+    //console.log(categories);
    
-    return resInfo ===null ? (<Shimmer/>) :(<div>
-            <h1>{resInfo.cards[2].card.card.info.name}</h1>
-               <h2>{resInfo.cards[2].card.card.info.cuisines} - {resInfo.cards[2].card.card.info.costForTwo}</h2>
-            <h2>Menu</h2>
-            <ul>
-                {resInfo.cards[4].groupedCard.cardGroupMap. REGULAR.cards[1].card.card.itemCards.map((item)=>(
-                    <li key={item.card.info.id}>{item.card.info.name} - {'Rs '+item.card.info.price/100}</li>
-                ))}
-                
-            </ul>
+    return resInfo ===null ? (<Shimmer/>) :(<div className ="text-center">
+            <h1 className ="font-bold my-6 text-2xl">{resInfo.cards[2].card.card.info.name}</h1>
+               <h2  className ="font-bold text-lg">{resInfo.cards[2].card.card.info.cuisines} - {resInfo.cards[2].card.card.info.costForTwo}</h2>
+               {/**category accordions **/}
+              {categories.map((category)=> <RestaurantCategory key ={category.card.card.title} data={category.card.card} />)}
         </div>)
 }
 export default RestaurantMenu;

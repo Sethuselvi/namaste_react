@@ -1,4 +1,4 @@
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard,{withPromotedLabel} from "./RestaurantCard";
 import { useState,useEffect, use } from "react";
 import Shimmer from "./Shimmer";
 import {PROXY_URL} from "../utils/constants";
@@ -8,14 +8,18 @@ const Body = ()=>{
     const [listOfRestaurants,setlistOfRestaurants] =useState([])
     const [filteredRestaurants,setfilteredRestaurants] =useState([])
      const [searchText,setsearchText] =useState("")
+     const RestaurantCardPromoted = withPromotedLabel(RestaurantCard);
      const onlineStatus = useOnlineStatus();
+     console.log(listOfRestaurants)
     useEffect(()=>{fetchData()},[]);
     const fetchData = async () =>{
         // const swiggyUrl = 'https://www.swiggy.com/dapi/restaurants/list/v5?lat=13.059791&lng=80.1989893&collection=83639&tags=layout_CCS_Biryani&sortBy=&filters=&type=rcv2&offset=0&page_type=null';
         // const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(swiggyUrl)}`;
         const data = await fetch(PROXY_URL);
         const json = await data.json();
-        const swiggyData = JSON.parse(json.contents);
+        //Use JSON parse only if the url needs CORS proxy
+        //const swiggyData = JSON.parse(json.contents);
+          const swiggyData = json;
        
         // console.log(swiggyData.data.cards);
         // console.log(swiggyData.data.cards[5].card.card.info);
@@ -55,7 +59,7 @@ const Body = ()=>{
         </div>
         <div className="flex flex-wrap">
             
-            {filteredRestaurants.map((restaurant) => (<Link  key ={restaurant.info.id} to={"/restaurant/" + restaurant.info.id} ><RestaurantCard resData = {restaurant}/></Link>
+            {filteredRestaurants.map((restaurant) => (<Link  key ={restaurant.info.id} to={"/restaurant/" + restaurant.info.id} >{restaurant.info.promoted ?<RestaurantCardPromoted resData = {restaurant} /> :<RestaurantCard resData = {restaurant}/>}</Link>
             
         ))} 
             {/* <RestaurantCard resData={resList[0]}/>

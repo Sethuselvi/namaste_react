@@ -4,8 +4,10 @@ export const CDN_URL="https://media-assets.swiggy.com/swiggy/image/upload/fl_los
     
 }
 //  export const SWIGGY_URL = 'https://www.swiggy.com/dapi/restaurants/list/v5?lat=13.059791&lng=80.1989893&collection=83639&tags=layout_CCS_Biryani&sortBy=&filters=&type=rcv2&offset=0&page_type=null';
-export const SWIGGY_URL ='https://namastedev.com/api/v1/listRestaurants'
-export const PROXY_URL = `https://api.allorigins.win/get?url=${encodeURIComponent(SWIGGY_URL)}`;
+//export const SWIGGY_URL ='https://namastedev.com/api/v1/listRestaurants'
+export const SWIGGY_URL = 'https://mocki.io/v1/5e937d06-1178-4691-943e-f743c582970b'
+export const PROXY_URL = 'https://mocki.io/v1/5e937d06-1178-4691-943e-f743c582970b'
+//export const PROXY_URL = `https://api.allorigins.win/get?url=${encodeURIComponent(SWIGGY_URL)}`;
 
 // export const SWIGGYMENU_URL ='https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=13.059791&lng=80.1989893&restaurantId=10140&catalog_qa=undefined&query=Biryani&submitAction=ENTER'
 export const SWIGGYMENU_URL='https://namastedev.com/api/v1/listRestaurantMenu'
