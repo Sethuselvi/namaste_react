@@ -1,9 +1,10 @@
 import RestaurantCard,{withPromotedLabel} from "./RestaurantCard";
-import { useState,useEffect, use } from "react";
+import { useState,useEffect, useContext } from "react";
 import Shimmer from "./Shimmer";
 import {PROXY_URL} from "../utils/constants";
 import { Link } from "react-router";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import { UserContext } from "../utils/UserContext";
 const Body = ()=>{
     const [listOfRestaurants,setlistOfRestaurants] =useState([])
     const [filteredRestaurants,setfilteredRestaurants] =useState([])
@@ -11,6 +12,7 @@ const Body = ()=>{
      const RestaurantCardPromoted = withPromotedLabel(RestaurantCard);
      const onlineStatus = useOnlineStatus();
      console.log(listOfRestaurants)
+     const {loggedInUser,setUserName} = useContext(UserContext);
     useEffect(()=>{fetchData()},[]);
     const fetchData = async () =>{
         // const swiggyUrl = 'https://www.swiggy.com/dapi/restaurants/list/v5?lat=13.059791&lng=80.1989893&collection=83639&tags=layout_CCS_Biryani&sortBy=&filters=&type=rcv2&offset=0&page_type=null';
@@ -54,8 +56,10 @@ const Body = ()=>{
                     setlistOfRestaurants(filteredLists);
                 }
                 }>Top Rated Restaurants</button>
+                <label> UserName: </label>
+                {/*  Change the login user name with the input field using  Context*/}
+                 <input className="border border-black" onChange={(e)=>setUserName(e.target.value)} value={loggedInUser}/>
             </div>
-           
         </div>
         <div className="flex flex-wrap">
             

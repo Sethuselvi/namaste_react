@@ -8,6 +8,8 @@ import Error from "./components/Error";
 import RestaurantMenu from "./components/RestaurantMenu";
 // import Grocery from "./components/Grocery";
 import {lazy ,Suspense} from "react";
+import { UserContext } from "./utils/UserContext";
+import { useState ,useEffect} from "react"
 const Grocery = lazy(()=>import("./components/Grocery"));
 const About = lazy(()=>import("./components/About"));
 const Footer = ()=>{
@@ -16,12 +18,25 @@ const Footer = ()=>{
     </div>)
     
 }
+
 const AppLayout = ()=>{
+    const [userName,setUserName] = useState();
+useEffect(()=>{
+    //Make an API call and send username
+    const data = {
+        name:"Sethuselvi"
+    }
+    setUserName(data.name);
+},[])
     return(
+         <UserContext.Provider value={{ loggedInUser: userName,setUserName}}>
         <div className="app">
+            {/* <UserContext.Provider value={{ loggedInUser: "Arulan"}}> */}
          <Header/>
+         {/* </UserContext.Provider> */}
          <Outlet/>
         </div>
+        </UserContext.Provider>
     )
 }
 const appRouter = createBrowserRouter([

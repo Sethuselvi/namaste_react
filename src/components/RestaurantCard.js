@@ -1,9 +1,12 @@
 
 import{CDN_URL} from "../utils/constants"
-
+import { useContext } from "react";
+import { UserContext } from "../utils/UserContext";
 const RestaurantCard =(props)=>{
 const { resData } = props;
 const {cloudinaryImageId,name,cuisines,avgRating,sla}=resData.info;
+const {loggedInUser}  = useContext(UserContext);
+
 
     return(
         <div className="m-4 p-4 w-[250px] rounded-lg bg-gray-100 hover:bg-gray-200" >
@@ -12,6 +15,7 @@ const {cloudinaryImageId,name,cuisines,avgRating,sla}=resData.info;
             <h4> {cuisines}</h4>
             <h6>{avgRating} stars</h6>
             <h6>{sla.deliveryTime}mins</h6>
+             <h6>User:{loggedInUser}</h6>
         </div>
     )
 }
