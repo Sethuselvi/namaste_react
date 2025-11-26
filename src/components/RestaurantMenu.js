@@ -15,7 +15,7 @@ const RestaurantMenu = () => {
    
     return resInfo ===null ? (<Shimmer/>) :(<div className ="text-center">
             <h1 className ="font-bold my-6 text-2xl">{resInfo.cards[2].card.card.info.name}</h1>
-               <h2  className ="font-bold text-lg">{resInfo.cards[2].card.card.info.cuisines} - {resInfo.cards[2].card.card.info.costForTwo}</h2>
+               <h2  className ="font-bold text-lg">{resInfo.cards[2].card.card.info.cuisines.join(" , ")} - {resInfo.cards[2].card.card.info.costForTwo}</h2>
                {/**category accordions **/}
               {categories.map((category,index)=> <RestaurantCategory key ={category.card.card.title} data={category.card.card} showItems ={index == showIndex? true: false} setshowIndex={()=>setshowIndex(index)} />)}
         </div>)
