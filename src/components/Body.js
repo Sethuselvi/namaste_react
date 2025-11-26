@@ -11,22 +11,16 @@ const Body = ()=>{
      const [searchText,setsearchText] =useState("")
      const RestaurantCardPromoted = withPromotedLabel(RestaurantCard);
      const onlineStatus = useOnlineStatus();
-     console.log(listOfRestaurants)
+   
      const {loggedInUser,setUserName} = useContext(UserContext);
     useEffect(()=>{fetchData()},[]);
     const fetchData = async () =>{
-        // const swiggyUrl = 'https://www.swiggy.com/dapi/restaurants/list/v5?lat=13.059791&lng=80.1989893&collection=83639&tags=layout_CCS_Biryani&sortBy=&filters=&type=rcv2&offset=0&page_type=null';
-        // const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(swiggyUrl)}`;
+       
         const data = await fetch(PROXY_URL);
         const json = await data.json();
-        //Use JSON parse only if the url needs CORS proxy
-        //const swiggyData = JSON.parse(json.contents);
+      
           const swiggyData = json;
        
-        // console.log(swiggyData.data.cards);
-        // console.log(swiggyData.data.cards[5].card.card.info);
-        //const restaurants = [swiggyData.data.cards[3].card.card.info,swiggyData.data.cards[4].card.card.info,swiggyData.data.cards[5].card.card.info,swiggyData.data.cards[6].card.card.info,swiggyData.data.cards[7].card.card.info,swiggyData.data.cards[8].card.card.info,swiggyData.data.cards[9].card.card.info];
-        // const restaurant = swiggyData.data.cards.slice(3) .map(card => card.card.card.info);
         const restaurant = swiggyData.data.data.cards[1].card.card.gridElements.infoWithStyle.restaurants.map(info => info);
         setlistOfRestaurants(restaurant)
         setfilteredRestaurants(restaurant)
@@ -44,7 +38,6 @@ const Body = ()=>{
             <div className="m-4 p-4">
                 <input type="text" className="border border-solid border-black" value={searchText} onChange ={(e)=> setsearchText(e.target.value)}/>
                 <button className="px-4 py-2 bg-green-100 m-4 rounded-lg" onClick={()=>{
-                    console.log(searchText)
                     const filteredLists = listOfRestaurants.filter(res=>res.name.toLowerCase().includes(searchText.toLowerCase()));
                     setfilteredRestaurants(filteredLists);
                     }}>Search</button>
@@ -66,17 +59,7 @@ const Body = ()=>{
             {filteredRestaurants.map((restaurant) => (<Link  key ={restaurant.info.id} to={"/restaurant/" + restaurant.info.id} >{restaurant.info.promoted ?<RestaurantCardPromoted resData = {restaurant} /> :<RestaurantCard resData = {restaurant}/>}</Link>
             
         ))} 
-            {/* <RestaurantCard resData={resList[0]}/>
-            <RestaurantCard resData={resList[1]}/>
-            <RestaurantCard resData={resList[2]}/>
-            <RestaurantCard resData={resList[3]}/>
-            <RestaurantCard resData={resList[4]}/>
-            <RestaurantCard resData={resList[5]}/>
-            <RestaurantCard resData={resList[6]}/>
-            <RestaurantCard resData={resList[7]}/>
-            <RestaurantCard resData={resList[8]}/>
-            <RestaurantCard resData={resList[9]}/>
-            <RestaurantCard resData={resList[10]}/> */}
+           
         </div>
     </div>
     )

@@ -32,15 +32,5 @@ class About extends Component{
 
 }
 
-// const About= () =>{
-//     return(
-//         <div>
-//             <h1>This is About us page</h1>
-//             <p>This is Namaste React Web Series</p>
-//             {/* <User name={"Sethuselvi(function)"}/> */}
-//             <UserClass name={"Sethuselvi(classes)"} location={"Chennai"}/>
-//         </div>
-//     )
-// }
 
 export default About;
