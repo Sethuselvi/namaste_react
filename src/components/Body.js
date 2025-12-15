@@ -19,9 +19,9 @@ const Body = ()=>{
         const data = await fetch(PROXY_URL);
         const json = await data.json();
       
-          const swiggyData = json;
+        //   const swiggyData = json;
        
-        const restaurant = swiggyData.data.data.cards[1].card.card.gridElements.infoWithStyle.restaurants.map(info => info);
+        const restaurant = json.data.data.cards[1].card.card.gridElements.infoWithStyle.restaurants.map(info => info);
         setlistOfRestaurants(restaurant)
         setfilteredRestaurants(restaurant)
         
@@ -36,17 +36,17 @@ const Body = ()=>{
     <div className="body">
         <div className="filter flex items-center">
             <div className="m-4 p-4">
-                <input type="text" className="border border-solid border-black" value={searchText} onChange ={(e)=> setsearchText(e.target.value)}/>
+                <input type="text" data-testid="searchInput" className="border border-solid border-black" value={searchText} onChange ={(e)=> setsearchText(e.target.value)}/>
                 <button className="px-4 py-2 bg-green-100 m-4 rounded-lg" onClick={()=>{
-                    const filteredLists = listOfRestaurants.filter(res=>res.name.toLowerCase().includes(searchText.toLowerCase()));
+                    const filteredLists = listOfRestaurants.filter(res=>res.info.name.toLowerCase().includes(searchText.toLowerCase()));
                     setfilteredRestaurants(filteredLists);
                     }}>Search</button>
             </div>
             <div >
                  <button className="px-4 py-2 bg-gray-100 rounded-lg" onClick={
                 ()=>{
-                    const filteredLists = listOfRestaurants.filter(res=>res.avgRating>4);
-                    setlistOfRestaurants(filteredLists);
+                    const filteredLists = listOfRestaurants.filter(res=>res.info.avgRating >= 4.5);
+                    setfilteredRestaurants(filteredLists);
                 }
                 }>Top Rated Restaurants</button>
                 <label> UserName: </label>
@@ -54,9 +54,9 @@ const Body = ()=>{
                  <input className="border border-black" onChange={(e)=>setUserName(e.target.value)} value={loggedInUser}/>
             </div>
         </div>
-        <div className="flex flex-wrap">
+        <div className="flex flex-wrap" >
             
-            {filteredRestaurants.map((restaurant) => (<Link  key ={restaurant.info.id} to={"/restaurant/" + restaurant.info.id} >{restaurant.info.promoted ?<RestaurantCardPromoted resData = {restaurant} /> :<RestaurantCard resData = {restaurant}/>}</Link>
+            {filteredRestaurants.map((restaurant) => (<Link  data-testid="resCard" key ={restaurant.info.id} to={"/restaurant/" + restaurant.info.id} >{restaurant.info.promoted ?<RestaurantCardPromoted resData = {restaurant} /> :<RestaurantCard resData = {restaurant}/>}</Link>
             
         ))} 
            

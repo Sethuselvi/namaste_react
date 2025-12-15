@@ -8,7 +8,7 @@ const Header =()=>{
     let btnName ="Login"
     const [btnNameReact,setbtnNameReact] = useState("Login")
     const {loggedInUser}  = useContext(UserContext);
-    console.log(loggedInUser);
+    // console.log(loggedInUser);
   
     //If no dependency array => useEffect is called on every render\
     // If dependency array is empty []=>useEffect is called on initial render (just once)
@@ -27,6 +27,7 @@ const Header =()=>{
                
                 <ul className="flex p-4 m-4">
                     <li className="px-4">Online Status{onlineStatus ? "✅" :"🔴"}</li>
+                    {/* <li className="px-4">{onlineStatus ? "Online" :"Offline"}</li> */}
                     <li className="px-4"><Link to="/">Home</Link></li>
                     <li className="px-4"><Link to="/about">About us</Link></li>
                     <li className="px-4"><Link to="/contact">Contact us</Link></li>
